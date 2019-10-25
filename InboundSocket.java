@@ -37,6 +37,18 @@ public class InboundSocket implements Runnable {
         return false;
       }
 
+
+      public Socket acceptConnection(ServerSocket serverSocket){
+        try{
+
+        }
+        catch(Exception e){
+          return null;
+        }
+      }
+
+
+
       @Overrides
       public void run(){
 
