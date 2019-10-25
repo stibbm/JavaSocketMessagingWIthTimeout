@@ -38,9 +38,18 @@ public class InboundSocket implements Runnable {
       }
 
 
+      // Accepts/Establishes a socket connection for an incoming
+      // connection request
+      // @Param ServerSocket serverSocket
+      // --> Used to accept the incoming connection on
+      // @Return Socket clientSocket
+      // --> established socket connection to the client
+      // @Return on exception
+      // --> null if an exception is thrown
       public Socket acceptConnection(ServerSocket serverSocket){
         try{
-
+          Socket clientSocket = serverSocket.accept();
+          return clientSocket;
         }
         catch(Exception e){
           return null;
