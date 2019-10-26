@@ -34,7 +34,7 @@ class ClientMessageGrabber implements Runnable {
       synchronized(inboundMessageQueue){
         inboundMessageQueue.add(new Message(obj));
       }
-      ios.close();
+      ois.close();
       this.clientSocket.close();
     }
     catch(Exception e){
