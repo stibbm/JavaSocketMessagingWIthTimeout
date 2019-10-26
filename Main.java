@@ -10,6 +10,13 @@ public class Main {
 		Thread inboundSocket = new Thread(new InboundSocket(inboundMessageQueue));
 		inboundSocket.start();
 
+		while(true){
+			try{
+				Thread.sleep(1000);
+			}catch(Exception e){
+			}
+			System.out.println(inboundMessageQueue);
+		}
 
 
 	}
