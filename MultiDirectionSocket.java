@@ -12,7 +12,7 @@ class MultiDirectionSocket {
     int inboundPort;
 
     // immediately starts listening for incoming connections
-    class MultiDirectionSocket(){
+    public MultiDirectionSocket(){
         messagesReceived = new LinkedList<>();
         inboundSocket = new Thread(new InboundSocket(messagesReceived));
         inboundSocket.start();
