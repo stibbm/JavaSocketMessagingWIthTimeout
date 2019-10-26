@@ -31,9 +31,11 @@ public class InboundSocket implements Runnable {
   private boolean initServerSocket(int port) {
     try{
       this.serverSocket = new ServerSocket(port);
+      return true;
     }catch(Exception e){
       e.printStackTrace();
     }
+    return false;
   }
 
 
