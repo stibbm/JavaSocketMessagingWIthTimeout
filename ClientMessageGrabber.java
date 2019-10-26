@@ -29,13 +29,11 @@ class ClientMessageGrabber implements Runnable {
   @Override
   public void run(){
     try{
-      
       ObjectInputStream ois = new ObjectInputStream(this.clientSocket.getInputStream());
       Object obj = ois.readObject();
       inboundMessageQueue.add(new Message(obj));
       ios.close();
       this.clientSocket.close();
-
     }
     catch(Exception e){
       e.printStackTrace();
