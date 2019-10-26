@@ -76,9 +76,13 @@ public class InboundSocket implements Runnable {
       }
       // start the thread to receive the message and store
       // in the queue
-      Thread clientMessageGrabber = new Thread(
-        new ClientMessageGrabber(clientSocket, inboundMessageQueue));
-      clientMessageGrabber.start();
+      try{
+        Thread clientMessageGrabber = new Thread(
+          new ClientMessageGrabber(clientSocket, inboundMessageQueue));
+        clientMessageGrabber.start();
+      }catch(Exception e){
+        e.printStackTrace();
+      }
     }
   }
 
