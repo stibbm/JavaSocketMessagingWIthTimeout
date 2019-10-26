@@ -36,7 +36,7 @@ class MultiDirectionSocket {
             }
             else{
                 Message message = (Message)messagesReceived.peek();
-                messagesReceived.pop();
+                messagesReceived.remove();
                 return message;
             }
         }
