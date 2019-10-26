@@ -20,6 +20,6 @@ class ClientMessageGrabber implements Runnable {
   // be accessed by the creator of the thread
   @Override
   public void run(){
-
+    
   }
 }
