@@ -12,7 +12,7 @@ public class Main {
 
 		while(true){
 			try{
-				Thread.sleep(10000);
+				//Thread.sleep(10000);
 				String messageText = "messageText";
 				Message message = new Message(messageText);
 				String localhost = "127.0.0.1";
@@ -23,7 +23,10 @@ public class Main {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			System.out.println(inboundMessageQueue);
+			synchronized(inboundMessageQueue){
+				System.out.println(inboundMessageQueue);
+			}
+			
 		}
 
 
