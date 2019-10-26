@@ -25,21 +25,15 @@ public class InboundSocket implements Runnable {
   }
 
   // Sets up a serverSocket to listen for incoming connections
-  // tries 10 different ports before failing
-  // returns whether was successful
+  // @Return boolean success
+  // --> returns whether the serverSocket was successfully
+  // initialized
   private boolean initServerSocket(int port) {
-    for(int attempt=0;attempt<10;attempt++){
-      try{
-        this.serverSocket = new ServerSocket(port + attempt);
-        this.serverPort = port;
-        this.serverSocket.setSoTimeout(DEFAULT_BASE_TIMEOUT); // set the socket timeout
-        // could just throw an exception here instead
-        return true;
-      }catch(Exception e){
-        e.printStackTrace();
-      }
+    try{
+      this.serverSocket = new ServerSocket(port);
+    }catch(Exception e){
+      e.printStackTrace();
     }
-    return false;
   }
 
 
