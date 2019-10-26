@@ -27,6 +27,7 @@ public class InboundSocket implements Runnable {
         for(int attempt=0;attempt<10;attempt++){
           try{
             this.serverSocket = new ServerSocket(port + attempt);
+            this.port = port;
             this.setSoTimeout(DEFAULT_BASE_TIMEOUT); // set the socket timeout
             // could just throw an exception here instead
             return true;
@@ -58,12 +59,23 @@ public class InboundSocket implements Runnable {
 
 
 
+      // accept the incoming connection from the client and e
       @Overrides
       public void run(){
+        // accept incoming client connection requests
+        while(true){
+          clientSocket = acceptConnection(this.serverSocket);
+          if(clientSocket == null){
+            continue;
+          }
+
+        Thread clientMessageGrabber = new Thread(
+          new ClientMessageGrabber(inboundMessageQueue));
 
 
 
 
+        }
       }
 
 
