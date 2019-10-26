@@ -6,6 +6,7 @@ import java.io.Exception;
 
 class ClientMessageGrabber implements Runnable {
 
+  static final long DEFAULT_BASE_TIMEOUT = 100;
   Queue<Message> inboundMessageQueue;
   Socket clientSocket;
 
@@ -20,6 +21,7 @@ class ClientMessageGrabber implements Runnable {
     Queue<Message> inboundMessageQueue){
     this.inboundMessageQueue = inboundMessageQueue;
     this.clientSocket = clientSocket;
+    this.clientSocket.setSoTimeout(DEFAULT_TIMEOUT);
   }
 
   // recieves the message from the client and stores it in the Queue which can
@@ -28,6 +30,12 @@ class ClientMessageGrabber implements Runnable {
   public void run(){
     try{
       
+      ObjectInputStream ois = new ObjectInputStream(this.clientSocket.getInputStream());
+      Object obj = ois.readObject();
+      inboundMessageQueue.add(new Message(obj));
+      ios.close();
+      this.clientSocket.close();
+
     }
     catch(Exception e){
       e.printStackTrace();
