@@ -9,7 +9,7 @@ public class Main {
 		Queue<Message> inboundMessageQueue = new LinkedList<>();
 		Thread inboundSocket = new Thread(new InboundSocket(inboundMessageQueue));
 		inboundSocket.start();
-
+		
 		while(true){
 			try{
 				Thread.sleep(1000);
