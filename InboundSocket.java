@@ -16,7 +16,7 @@ public class InboundSocket implements Runnable {
   Queue<Message> inboundMessageQueue;
 
   // constructor for inbound serverSocket
-  // @Param Queue<Object> inboundMessageQueue
+  // @Param Queue inboundMessageQueue
   // -> Used to store the inbound messages so that the creator
   // of the thread has a handle to access them
   public InboundSocket(Queue<Message> inboundMessageQueue){
@@ -25,6 +25,11 @@ public class InboundSocket implements Runnable {
   }
 
   // constructor for inboundSocket
+  // @Param Queue inboundMessage
+  // --> Queue for storing received messages in
+  // @Param int port
+  // --> Port that will be used locally to listen for incoming
+  // connections
   public InboundSocket(Queue<Message> inboundMessageQueue, int port){
     this.serverPort = port;
     initServerSocket(port);
