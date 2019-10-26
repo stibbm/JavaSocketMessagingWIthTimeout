@@ -24,15 +24,20 @@ public class OutboundSocket implements Runnable {
         this.message = message;
         this.remoteIpAddress = remoteIpAddress;
         this.remotePort = remotePort;
-        this.socket = new Socket(remoteIpAddress, remotePort);
-        this.socket.setSoTimeout(150);
+        try{
+            this.socket = new Socket(remoteIpAddress, remotePort);
+            this.socket.setSoTimeout(150);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
     // sends the message to the specified destination
     @Override
     public void run(){
         try{
-            this.ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             oos.writeObject(this.message);
             oos.close();
         }catch(Exception e){
