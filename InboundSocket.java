@@ -24,6 +24,12 @@ public class InboundSocket implements Runnable {
     initServerSocket(DEFAULT_PORT); // init server on given port
   }
 
+  // constructor for inboundSocket
+  public InboundSocket(Queue<Message> inboundMessageQueue, int port){
+    this.serverPort = port;
+    initServerSocket(port);
+  }
+
   // Sets up a serverSocket to listen for incoming connections
   // @Return boolean success
   // --> returns whether the serverSocket was successfully
