@@ -1,12 +1,11 @@
 import java.util.*;
 import java.io.*;
 import java.net.*;
-import java.io.Exception;
 
 
 class ClientMessageGrabber implements Runnable {
 
-  static final long DEFAULT_BASE_TIMEOUT = 100;
+  static final int DEFAULT_BASE_TIMEOUT = 100;
   Queue<Message> inboundMessageQueue;
   Socket clientSocket;
 
@@ -18,10 +17,11 @@ class ClientMessageGrabber implements Runnable {
   // @Param Queue<Message>
   // --> Will place the message into the message queue
   public ClientMessageGrabber(Socket clientSocket,
-    Queue<Message> inboundMessageQueue){
+    Queue<Message> inboundMessageQueue) throws SocketException{
     this.inboundMessageQueue = inboundMessageQueue;
     this.clientSocket = clientSocket;
-    this.clientSocket.setSoTimeout(DEFAULT_TIMEOUT);
+    this.clientSocket.setSoTimeout(DEFAULT_BASE_TIMEOUT);
+
   }
 
   // recieves the message from the client and stores it in the Queue which can

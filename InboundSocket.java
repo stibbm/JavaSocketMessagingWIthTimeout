@@ -6,7 +6,7 @@ import java.util.Exception;
 
 public class InboundSocket implements Runnable {
     static final int DEFAULT_PORT = 8987;
-    static final long DEFAULT_BASE_TIMEOUT = 100;
+    static final int DEFAULT_BASE_TIMEOUT = 100;
 
     int serverPort;
     ServerSocket serverSocket;
@@ -24,7 +24,7 @@ public class InboundSocket implements Runnable {
     // Sets up a serverSocket to listen for incoming connections
     // tries 10 different ports before failing
     // returns whether was successful
-    private boolean initServerSocket(int port){
+    private boolean initServerSocket(int port) {
       for(int attempt=0;attempt<10;attempt++){
         try{
           this.serverSocket = new ServerSocket(port + attempt);
@@ -32,7 +32,7 @@ public class InboundSocket implements Runnable {
           this.serverSocket.setSoTimeout(DEFAULT_BASE_TIMEOUT); // set the socket timeout
           // could just throw an exception here instead
           return true;
-        }catch(Exeption e){
+        }catch(Exception e){
           e.printStackTrace().
         }
       }
@@ -69,13 +69,11 @@ public class InboundSocket implements Runnable {
         if(clientSocket == null){
           continue;
         }
-
-      Thread clientMessageGrabber = new Thread(
-        new ClientMessageGrabber(inboundMessageQueue));
-
-
-
-
+        // start the thread to receive the message and store
+        // in the queue
+        Thread clientMessageGrabber = new Thread(
+          new ClientMessageGrabber(inboundMessageQueue));
+        clientMessageGrabber.start();
       }
     }
 
