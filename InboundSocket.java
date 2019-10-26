@@ -15,13 +15,13 @@ public class InboundSocket implements Runnable {
 
     int serverPort;
     ServerSocket serverSocket;
-    Queue<Object> inboundMessageQueue;
+    Queue<Message> inboundMessageQueue;
 
     // constructor for inbound serverSocket
     // @Param Queue<Object> inboundMessageQueue
     // -> Used to store the inbound messages so that the creator
     // of the thread has a handle to access them
-    public InboundSocket(Queue<Object> inboundMessageQueue){
+    public InboundSocket(Queue<Message> inboundMessageQueue){
       this.inboundMessageQueue = inboundMessageQueue;
       initServerSocket(DEFAULT_PORT); // init server on given port
     }
@@ -70,14 +70,14 @@ public class InboundSocket implements Runnable {
     public void run(){
       // accept incoming client connection requests
       while(true){
-        clientSocket = acceptConnection(this.serverSocket);
+        Socket clientSocket = acceptConnection(this.serverSocket);
         if(clientSocket == null){
           continue;
         }
         // start the thread to receive the message and store
         // in the queue
         Thread clientMessageGrabber = new Thread(
-          new ClientMessageGrabber(inboundMessageQueue));
+          new ClientMessageGrabber(clientSocket, inboundMessageQueue));
         clientMessageGrabber.start();
       }
     }
