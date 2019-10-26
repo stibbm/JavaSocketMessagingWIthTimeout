@@ -33,7 +33,7 @@ public class InboundSocket implements Runnable {
           // could just throw an exception here instead
           return true;
         }catch(Exception e){
-          e.printStackTrace().
+          e.printStackTrace();
         }
       }
       return false;
@@ -61,7 +61,7 @@ public class InboundSocket implements Runnable {
 
 
     // accept the incoming connection from the client and e
-    @Overrides
+    @Override
     public void run(){
       // accept incoming client connection requests
       while(true){
