@@ -31,7 +31,9 @@ class ClientMessageGrabber implements Runnable {
     try{
       ObjectInputStream ois = new ObjectInputStream(this.clientSocket.getInputStream());
       Object obj = ois.readObject();
-      inboundMessageQueue.add(new Message(obj));
+      synchronized(inboundMessageQueue){
+        inboundMessageQueue.add(new Message(obj));
+      }
       ios.close();
       this.clientSocket.close();
     }
