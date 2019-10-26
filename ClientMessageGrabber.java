@@ -1,3 +1,9 @@
+import java.util.*;
+import java.io.*;
+import java.net.*;
+import java.io.Exception;
+
+
 class ClientMessageGrabber implements Runnable {
 
   Queue<Message> inboundMessageQueue;
@@ -20,6 +26,11 @@ class ClientMessageGrabber implements Runnable {
   // be accessed by the creator of the thread
   @Override
   public void run(){
-    
+    try{
+      
+    }
+    catch(Exception e){
+      e.printStackTrace();
+    }
   }
 }
