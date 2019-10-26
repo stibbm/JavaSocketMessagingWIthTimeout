@@ -10,7 +10,7 @@ public class Main {
 		Thread inboundSocket = new Thread(new InboundSocket(inboundMessageQueue));
 		inboundSocket.start();
 
-		
+
 
 	}
 
